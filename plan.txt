@@ -3,3 +3,15 @@ add view trait func
 add letter action to leave mine
 
 add fool proofing to packing
+
+storing from the store and blacksmith
+
+add an auto run function for the mine. that way player interaction is not neccessary
+
+add off hand item function and items for it (knight, wizard, archer, mechanic, etc...)
+
+add function in settings to switch to single wielding and to give a damage buff to weapon
+
+to make text bold in console print('\033[1mHello World![0m)
+
+add increase to critical hit chance for each level up or something like that

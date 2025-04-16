@@ -8,12 +8,20 @@ clear = lambda: os.system('cls')
 #----inventory----#
 
 gold = 200
-weapons_owned = []
+
+weapons_owned = [['No Weapon', 10, 0, 1]]
 weapons_list = [] 
+
 weapon = 'Basic Wand'
 first_weapon = ''
-first_weapon_value = 0
+
+off_hand = ''
+
 weapon_value = 0
+first_weapon_value = 0
+
+off_hand_value = 0
+
 current_weapon_damage = 0  
 weapon_elemental_check = 0
 critical_hit_chance = 0
@@ -70,7 +78,7 @@ def settings():
     global text_timer
     global running
 
-    settings_ui = input('Settings:\n1.Time Between text\n2.Use Perks\n3.View xp Progress\n4.Tutorial\n5.Leave Game\nInput: ')
+    settings_ui = input('Settings:\n1.Time Between text\n2.Use Perks\n3.View xp Progress\n4.Swap Weapons\n5.Tutorial\n6.Leave Game\nInput: ')
 
     if settings_ui == '1':
         time_between_text = (input('How long would you like the time between text to be? (in seoonds): '))
@@ -91,9 +99,13 @@ def settings():
     
     elif settings_ui == '4':
         clear()
+        weapons_purchased()
+    
+    elif settings_ui == '5':
+        clear()
         tutorial()
 
-    elif settings_ui == '5':
+    elif settings_ui == '6':
         running = False
 
     else:
@@ -390,16 +402,19 @@ def stats():
     global weapon_elemental_check
 
     if selected_class == 'Wizard':
+
+#starting stat points is 75 points per class
         starting_health = 25
         health = 25
         defense = 10
-        stamina = 20
-        weight = 15
-        strength = 10
+        #stamina = 20
+        #weight = 15
+        strength = 5
         intelligence = 20
-        magic = 10
+        magic = 15
+
         elemental = .10
-        stealth = 20
+        #stealth = 20
         luck = 10
 
         weapon = 'Basic Wand'
@@ -408,19 +423,21 @@ def stats():
         weapon_elemental_check = 0
         first_weapon = weapon
         first_weapon_value = weapon_value
-        move_speed = 20
+        #move_speed = 20
 
     elif selected_class == 'Sorcerer':
+        #same as wizard
         starting_health = 25
         health = 25
         defense = 10
-        stamina = 20
-        weight = 15
+        #stamina = 20
+        #weight = 15
         strength = 10
         intelligence = 20
         magic = 10
+        
         elemental = .10
-        stealth = 20
+        #stealth = 20
         luck = 10
 
         weapon = 'Basic Attunement'
@@ -429,19 +446,21 @@ def stats():
         weapon_elemental_check = 0
         first_weapon = weapon
         first_weapon_value = weapon_value
-        move_speed = 20
+        ##move_speed = 20
 
     elif selected_class == 'Knight':
-        starting_health = 30
-        health = 30
+        
+        starting_health = 25
+        health = 25
         defense = 10
-        stamina = 20
-        weight = 15
+        #stamina = 20
+        #weight = 15
         strength = 10
         intelligence = 20
         magic = 10
+        
         elemental = .10
-        stealth = 20
+        #stealth = 20
         luck = 10
 
         weapon = 'Basic Sword'
@@ -450,19 +469,21 @@ def stats():
         weapon_elemental_check = 1
         first_weapon = weapon
         first_weapon_value = weapon_value
-        move_speed = 20
+        #move_speed = 20
         
     elif selected_class == 'Samurai':
-        starting_health = 30
-        health = 30
+        
+        starting_health = 25
+        health = 25
         defense = 10
-        stamina = 20
-        weight = 15
+        #stamina = 20
+        #weight = 15
         strength = 10
         intelligence = 20
         magic = 10
+        
         elemental = .10
-        stealth = 20
+        #stealth = 20
         luck = 10
 
         weapon = 'Basic Katana'
@@ -471,63 +492,69 @@ def stats():
         weapon_elemental_check = 1
         first_weapon = weapon
         first_weapon_value = weapon_value
-        move_speed = 20
+        #move_speed = 20
         
     elif selected_class == 'Ninja':
+        
         starting_health = 25
         health = 25
         defense = 10
-        stamina = 20
-        weight = 15
+        #stamina = 20
+        #weight = 15
         strength = 10
         intelligence = 20
         magic = 10
+        
         elemental = .10
-        stealth = 20
+        #stealth = 20
         luck = 10
 
         weapon = 'Basic Kunai'
-        ammo = 'Basic Kunai'
+       #ammo = 'Basic Kunai'
         weapon_value = 20
         current_weapon_damage = 10
         weapon_elemental_check = 1
         first_weapon = weapon
         first_weapon_value = weapon_value
-        move_speed = 20
+        #move_speed = 20
         
     elif selected_class == 'Archer':
-        starting_health = 20
-        health = 20
-        defense = 25
-        stamina = 20
-        weight = 15
+        
+        starting_health = 25
+        health = 25
+        defense = 10
+        #stamina = 20
+        #weight = 15
         strength = 10
         intelligence = 20
         magic = 10
+        
         elemental = .10
-        stealth = 20
+        #stealth = 20
         luck = 10
 
         weapon = 'Basic Bow'
-        ammo = 'Basic Arrow'
+        #ammo = 'Basic Arrow'
         weapon_value = 20
         current_weapon_damage = 10
         weapon_elemental_check = 1
         first_weapon = weapon
         first_weapon_value = weapon_value
-        move_speed = 20
+        #move_speed = 20
         
     elif selected_class == 'Tank':
-        starting_health = 35
-        health = 35
+        
+        starting_health = 25
+        health = 25
         defense = 10
-        stamina = 20
-        weight = 15
+        #stamina = 20
+        #weight = 15
         strength = 10
         intelligence = 20
         magic = 10
+        
         elemental = .10
-        stealth = 20
+        #stealth = 20
         luck = 10
 
         weapon = 'Basic Shield'
@@ -536,40 +563,44 @@ def stats():
         weapon_elemental_check = 1
         first_weapon = weapon
         first_weapon_value = weapon_value
-        move_speed = 20
+        #move_speed = 20
         
     elif selected_class == 'Brainiac':
+        
         starting_health = 25
         health = 25
         defense = 10
-        stamina = 20
-        weight = 15
+        #stamina = 20
+        #weight = 15
         strength = 10
         intelligence = 20
         magic = 10
+        
         elemental = .10
-        stealth = 20
+        #stealth = 20
         luck = 10
 
-        weapon = 'Textbook'
+        weapon = 'Telekinesis'
         weapon_value = 20
         current_weapon_damage = 10
         weapon_elemental_check = 1
         first_weapon = weapon
         first_weapon_value = weapon_value
-        move_speed = 20
+        #move_speed = 20
         
     elif selected_class == 'Mechanic':
+        
         starting_health = 25
         health = 25
         defense = 10
-        stamina = 20
-        weight = 15
+        #stamina = 20
+        #weight = 15
         strength = 10
         intelligence = 20
         magic = 10
+        
         elemental = .10
-        stealth = 20
+        #stealth = 20
         luck = 10
 
         weapon = 'Copper Turret'
@@ -578,7 +609,7 @@ def stats():
         weapon_elemental_check = 1
         first_weapon = weapon
         first_weapon_value = weapon_value
-        move_speed = 20
+        #move_speed = 20
         
 def trait_selection():
     global trait 
@@ -590,6 +621,9 @@ def trait_selection():
     elif pick_trait == '2':
         trait = 'Quick'
         print('this trait is not yet developed :( sorry )')
+        time.sleep(text_timer)
+        clear()
+        trait_selection()
         pass #attack speed and extra move speed
     elif pick_trait == '3':
         global strength
@@ -787,23 +821,53 @@ def use_perks():
     clear()
     print(f'New stats:\nHealth: {health}\nDefense: {defense}\nWeight: {weight}\nStrength: {strength}\nIntelligence: {intelligence}\nMagic: {magic}\nStealth: {stealth}\nInput: ')
 
-def weapon_damage():
+def weapon_list_function():
 
     global weapons_list
     global random_weapon_choosen
     global random_weapon
 
 #copy and paste list#
-#['Basic', 10, 0, 1],['Common', 15, 0, 1],['Uncommon', 20, 0, 1],['Rare', 25, 0, 1],['Ultra Rare', 30, 0, 1],['Legendary', 40, 0, 1],['Mythical', 50, 0, 1],#
+#    ['Basic', 10, 15, 1],['Common', 15, 25, 1],['Uncommon', 20, 40, 1],['Rare', 25, 55, 1],['Ultra Rare', 30, 70, 1],['Legendary', 40, 90, 1],['Mythical', 50, 150, 1],    #
+    def closing_tab():
+        #    Rarity  | Damage | Value | Elemental |  
+        #  ----------|--------|-------|-----------|
+        # Basic      |   10   |  15   |    n/a    |    
+        # Common     |   15   |  25   |    n/a    |         
+        # Uncommon   |   20   |  40   |    n/a    |
+        # Rare       |   25   |  55   |    n/a    |        
+        # Ultra Rare |   30   |  70   |    n/a    |        
+        # Legendary  |   40   |  90   |    n/a    |        
+        # Mythical   |   50   |  150  |    n/a    |        
+        # *Unique*   |   65   |   ?   |    n/a    |        
+        #============|========|=======|===========|
+        # Weapon types: main hand: Wand, Attunement, Sword, Katana, Kunai, Bow, Shield, Telekinesis, Golem
+        # Weapon Types: off Hand:  grimoire, None, shield, katana, shuriken, arrow, shield, none, support golem(might change this one)  
+        # Unique's:     
+        pass
+#weapon - damage - value - elemental check(0 = yes, 1 = no)       ------LIST OF ALL WEAPONS EXCEPT FOR UNIQUES------
+    weapons_list = [['Basic Wand', 10, 15, 1],['Common Wand', 15, 25, 1],['Uncomon Wand', 20, 40, 1],['Rare Wand', 25, 55, 0],['Ultra Rare Wand', 30, 70, 0],['Legendary Wand', 40, 90, 0],['Mythical Wand', 50, 150, 0],['Basic Attunement', 10, 15, 1],['Common Attunement', 15, 25, 1],['Uncommon Attunement', 20, 40, 1],['Rare Attunement', 25, 55, 1],['Ultra Rare Attunement', 30, 70, 1],['Legendary Attunement', 40, 90, 1],['Mythical Attunement', 50, 150, 1],['Basic Sword', 10, 15, 1],['Common Sword', 0, 25, 1],['Uncommon Sword', 0, 40, 1],['Rare Sword', 0, 55, 1],['Ultra Rare Sword', 0, 70, 1],['Legendary Sword', 0, 90, 1],['Mythical Sword', 0, 150, 1],['Basic Katana', 10, 15, 1],['Common Katana', 15, 25, 1],['Uncommon Katana', 20, 40, 1],['Rare Katana', 25, 55, 1],['Ultra Rare Katana', 30, 70, 1],['Legendary Katana', 40, 90, 1],['Mythical Katana', 50, 150, 1],['Basic Kunai', 10, 15, 1],['Common Kunai', 15, 25, 1],['Uncommon Kunai', 20, 40, 1],['Rare Kunai', 25, 55, 1],['Ultra Rare Kunai', 30, 70, 1],['Legendary Kunai', 40, 90, 1],['Mythical Kunai', 50, 150, 1],['Basic Bow', 10, 15, 1],['Common Bow', 15, 25, 1],['Uncommon Bow', 20, 40, 1],['Rare Bow', 25, 55, 1],['Ultra Rare Bow', 30, 70, 1],['Legendary Bow', 40, 90, 1],['Mythical Bow', 50, 150, 1],['Basic Shield', 10, 15, 1],['Common Shield', 15, 25, 1],['Uncommon Shield', 20, 40, 1],['Rare Shield', 25, 55, 1],['Ultra Rare Shield', 30, 70, 1],['Legendary Shield', 40, 90, 1],['Mythical Shield', 50, 150, 1]]
 
-#weapon - damage - value - elemental check(0 = yes, 1 = no)
-    weapons_list = [['Basic Wand', 10, 15, 1],['Common Wand', 15, 25, 1],['Uncomon Wand', 20, 40, 1],['Rare Wand', 25, 55, 0],['Ultra Rare Wand', 30, 70, 0],['Legendary Wand', 40, 90, 0],['Mythical Wand', 50, 150, 0],['Basic Sword', 10, 0, 1],['Common Sword', 0, 0, 1],['Uncommon Sword', 0, 0, 1],['Rare Sword', 0, 0, 1],['Ultra Rare Sword', 0, 0, 1],['Legendary Sword', 0, 0, 1],['Mythical Sword', 0, 0, 1]]
-
-    random_weapon = random.randint(0,len(weapons_list)-1)
+    random_weapon = random.randint(0,len(weapons_list))
 
     random_weapon_choosen = weapons_list[random_weapon][0] + ' | ' + 'Damage: ' + str(weapons_list[random_weapon][1]) + ' | ' + str(weapons_list[random_weapon][2]) + 'g'
 
     return random_weapon_choosen
+
+def off_hand_weapon():
+
+    global off_hand_list
+    global off_hand_chosen
+    global random_off_hand
+    
+    # weapon -- damage multiplier -- value
+    off_hand_list = [['Basic Katana', .05, 15],['Common Katana', .06, 25],['Uncommon Katana', .07, 40],['Rare Katana', .08, 55],['Ultra Rare Katana', .09, 70],['Legendary Katana', .10, 90],['Mythical Katana', .11, 150]]
+
+    random_off_hand = random.randint(0,len(off_hand_list))
+
+    off_hand_chosen = off_hand_list[random_off_hand][0] + ' | ' + 'Damage: ' + str(off_hand_list[random_off_hand][1]) + ' | ' + str(off_hand_list[random_off_hand][2]) + 'g'
+    
+    return off_hand_chosen
 
 def weapons_purchased():
 
@@ -814,60 +878,89 @@ def weapons_purchased():
     global weapon_elemental_check
     global weapons_owned
 
-    
-    
-    store_weapon = input(f'Whould you like to store current weapon ({weapon})?: ').lower()
-    if store_weapon == 'yes':
-        weapon_damage()
-        for i in range(0,len(weapons_list)-1):
-            if weapons_list[i][0] == weapon:
-                weapons_owned.append(weapons_list[i])
-                weapon = ''
-    
-    #elif store_weapon == 'no':
-    #    weapon_damage() 
-    #    swap_weapon = input('Would you like to swap weapons?: ')
-    #    if swap_weapon == 'yes':
-    #        for i in range(0,len(weapons_owned)):
-    #            print(f'{i+1}.{weapons_owned[i][0]}')
-    #        swap_to_weapon = int(input('What weapon would you like to swap to?: '))
-    #        for i in range(0,len(weapons_list)-1):
-    #            if weapons_list[i][0] == weapon:
-    #                weapons_owned.append(weapons_list[i])
-    #                weapon = ''
-    #        for i in range(0,len(weapons_owned)-1):
-    #            #gets rid of weapon being swapped
-    #        weapon = weapons_owned[swap_to_weapon-1][0]
-    #        current_weapon_damage = weapons_owned[swap_to_weapon-1][1]
-    #        weapon_value = weapons_owned[swap_to_weapon-1][2]
-    #        weapon_elemental_check = weapons_owned[swap_to_weapon-1][3]
-    #    print(weapon)
-    #    print(weapons_owned)   
-                    
-                                 
-
-        
-                            
-                    
-                    #    else:
-                    #        weapons_owned.append([])
-                    #        for c in range(0,4):
-                    #            for b in range(0,len(weapons_owned)-1):
-                    #                if weapons_owned[b] == '':
-                    #                    weapons_owned[b].append(weapons_list[i][c])
-#yep works --->       weapons_owned.append([])
-#        print(weapons_owned)
-#    elif store == 'no':
-#        swap_weapon = input('Would you like to swap weapons?: ')
-#        if swap_weapon == 'yes':
-#            swap_to_weapon = input('What weapon would you like to swap to?: ')
-#            for i in range(0,len(weapons_list)-1):
-#                if weapons_list[i][0] == swap_to_weapon:   
-#                    weapons_owned.append(weapon)
-#                    weapons_owned[len(weapons_owned)].append(weapon)
+    level_increase()
+    if weapon == '':
+        weapon_list_function() 
+        for i in range(0,len(weapons_owned)):
+            print(f'{i+1}.{weapons_owned[i][0]}')
+        swap_to_weapon = int(input('What weapon would you like to select?: '))
+        try:
+            swap_to_weapon = int(swap_to_weapon)
+            if swap_to_weapon > len(weapons_owned) or swap_to_weapon < 1:
+                print('That is not an available option')
+                time.sleep(text_timer)
+                clear()
+                weapons_purchased() 
+            else:   
+                for i in range(0,len(weapons_list)-1):
+                    if weapons_list[i][0] == weapon:
+                        weapons_owned.append(weapons_list[i])
+                        weapon = ''
+                        print(f'You have changed your weapon to: {weapon}')        
+                weapon = weapons_owned[swap_to_weapon-1][0]
+                current_weapon_damage = weapons_owned[swap_to_weapon-1][1]
+                weapon_value = weapons_owned[swap_to_weapon-1][2]
+                weapon_elemental_check = weapons_owned[swap_to_weapon-1][3]
+                for i in range(0,len(weapons_owned)):
+                    if weapons_owned[i][0] == weapon:
+                        print('yay')
+                        weapons_owned.remove(weapons_owned[i])
+                    else:
+                        print('error')
+        except ValueError:
+            print('Please enter a number')
+            time.sleep(text_timer)
+            clear()
+    else:
+        store_weapon = input(f'Whould you like to store current weapon ({weapon})?: ').lower()
+        if store_weapon == 'yes':
+            weapon_list_function()
+            for i in range(0,len(weapons_list)-1):
+                if weapons_list[i][0] == weapon:
+                    weapons_owned.append(weapons_list[i])
+                    weapon = ''
+        elif store_weapon == 'no':
+            weapon_list_function() 
+            swap_weapon = input('Would you like to swap weapons?: ')
+            if swap_weapon == 'yes':
+                for i in range(0,len(weapons_owned)):
+                    print(f'{i+1}.{weapons_owned[i][0]}')
+                swap_to_weapon = (input('What weapon would you like to swap to?: '))
+                try:
+                    swap_to_weapon = int(swap_to_weapon)
+                    if swap_to_weapon > len(weapons_owned) or swap_to_weapon < 1:
+                        print('That is not an available option')
+                        time.sleep(text_timer)
+                        clear()
+                        weapons_purchased()
+                    else:   
+                        for i in range(0,len(weapons_list)-1):
+                            if weapons_list[i][0] == weapon:
+                                weapons_owned.append(weapons_list[i])
+                                weapon = ''       
+                        weapon = weapons_owned[swap_to_weapon-1][0]
+                        current_weapon_damage = weapons_owned[swap_to_weapon-1][1]
+                        weapon_value = weapons_owned[swap_to_weapon-1][2]
+                        weapon_elemental_check = weapons_owned[swap_to_weapon-1][3]
+                        for i in range(0,len(weapons_owned)-1):
+                            if weapons_owned[i][0] == weapon:
+                                weapons_owned.remove(weapons_owned[i])
+                        print(f'You have changed your weapon to: {weapon}') 
+                        time.sleep(text_timer)
+                        clear()
+                except ValueError:
+                    clear()
+                    print('Please enter the number listed next to your desired weapon')
+                    time.sleep(text_timer)
+                    clear()
+                    weapons_purchased()
+                
+            else:
+                clear()  
 
 def store():
 
+    global weapons_owned
     global weapons_list 
     global first_weapon
     global first_weapon_value
@@ -880,7 +973,8 @@ def store():
 
     clear()
     level_increase()
-    
+
+#prints UI for Buying items
     print('Upon arriving at the store the clerk welcomes you and shows you his wares, look like he has a number of useful items;')
     print('------------------------------------------------------')
     purchase = input(f'Store items:                     Gold: {gold}g\n1.Health Potion 40g | Health Potions Owned: {health_potion_count}\n2.{first_weapon} {first_weapon_value}g\n3.Sell items\n------------------------------------------------------\nPress ENTER to leave store\nINPUT: ')
@@ -895,80 +989,29 @@ def store():
 
     elif purchase == '2':
         if gold >= 15 and weapon == '':
-            weapon = first_weapon
+            for i in range(0,len(weapons_list)-1):
+                if weapons_list[i][0] == first_weapon:
+                    weapons_owned.append(weapons_list[i])
             gold -= 15 # All first weapons will have value of 15g
+            print(f'You bought {first_weapon}')
+            time.sleep(text_timer)
             clear()
             level_increase()
             store()
 
     elif purchase == '3':
+
         clear()
-        if weapon == '':
-            sell_items = input(f'What items do you wish to sell?: \n---------------------------------\n1.Health Potion 40g | Owned: {health_potion_count}\n---------------------------------\nPress ENTER to go back\nINPUT: ')
-            if sell_items == '1':
-                if health_potion_count >= 1:
-                    health_potion_count -= 1
-                    gold += 40
-                    clear()
-                    level_increase()
-                    store()
-                else:
-                    health_potion_count = 0
-                    clear()
-                    print('You have no Potions to sell')
-                    time.sleep(2)
-                    clear()
-                    level_increase()
-                    store()
+        weapon_list_function()
+        level_increase()
+#prints UI for selling items
+        print(f'What items do you wish to sell?: \n---------------------------------\n1.Health Potion 40g | Owned: {health_potion_count}')
+        for i in range(0,len(weapons_owned)):
+            print(f'{i+2}.{weapons_owned[i][0]} {weapons_owned[i][2]}g')
+        print(f'{len(weapons_owned)+2}.{weapon} {weapon_value}g')
+        sell_items = input('---------------------------------\nPress ENTER to go back\nINPUT: ')
 
-            elif sell_items == '.dev':
-                clear()
-                password = input('What is the password?: ')
-                if password == 'wizzy':
-                    clear()
-                    add_gold = int(input('How much gold would you like to add?: '))
-                    gold += add_gold 
-                    clear()
-                    level_increase()
-                    store()
-                else:
-                    clear()
-                    print('Wrong password')
-                    time.sleep(1)
-                    clear()
-                    level_increase()
-                    store()
-
-            elif sell_items == '':
-                clear()
-                level_increase()
-                store()
-        else:
-            sell_items = input(f'What items do you wish to sell?: \n---------------------------------\n1.Health Potion 40g | Owned: {health_potion_count}\n2.{weapon} {weapon_value}g\n---------------------------------\nPress ENTER to go back\nINPUT: ')
-
-        if sell_items == '2':
-            if weapon != '':
-                weapon_damage()
-                for i in range(0,len(weapons_list)-1):
-                    if weapons_list[i][0] == weapon:
-                        print(f'You sold {weapon}')
-                        weapon = ''
-                        gold += weapons_list[i][2]
-                        time.sleep(text_timer)
-                    else:
-                        print('fix me')
-                clear()
-                level_increase()
-                store()
-            else:
-                clear()
-                print('You do not have a weapon to sell')
-                time.sleep(2)
-                clear()
-                level_increase()
-                store()
-
-        elif sell_items == '1':
+        if sell_items == '1':
             if health_potion_count >= 1:
                 health_potion_count -= 1
                 gold += 40
@@ -983,7 +1026,7 @@ def store():
                 clear()
                 level_increase()
                 store()
-        
+#-----CHEAT COMMAND-----#
         elif sell_items == '.dev':
             clear()
             password = input('What is the password?: ')
@@ -1006,23 +1049,47 @@ def store():
             clear()
             level_increase()
             store()
-    
+#Sell weapons from inventory
+        else:
+            try:
+                sell_items = int(sell_items)
+                if len(weapons_owned)+1 < sell_items:
+                    gold += weapon_value
+                    weapon = ''
+                    current_weapon_damage = 0
+                    weapon_value = 0
+                    weapon_elemental_check = 1
+                    clear()
+                    level_increase()
+                    print(f'Weapon: {weapon}')
+                    time.sleep(text_timer)
+                    clear()
+                elif len(weapons_owned)+1 <= sell_items:
+                    gold += weapons_owned[sell_items-2][2]
+                    weapons_owned.remove(weapons_owned[sell_items-2])
+                    print(weapons_owned)
+                else:
+                    print('You do not have a weapon to sell!')
+                    time.sleep(2)
+                    clear()
+                    level_increase()
+                    store()
+            except ValueError:
+                print('Not a number')
+#------CHEAT COMMAND------#                
     elif purchase == '.dev':
         clear()
         password = input('What is the password?: ')
         if password == 'wizzy':
             clear()
-            weapon_damage()
+            weapon_list_function()
             add_weapon = (input('What weapon would you like?: '))
             for c in range(0,len(weapons_list)-1):
                 if weapons_list[c][0] == add_weapon:
-                    weapon = weapons_list[c][0]
-                    current_weapon_damage = weapons_list[c][1]
-                    weapon_value = weapons_list[c][2]
-                    weapon_elemental_check = weapons_list[c][3]
-            print(f'Weapon set to {weapon}')
-            weapons_purchased()
-            print(weapons_owned)
+                    weapons_owned.append(weapons_list[c])
+            print(f'Weapon added to inventory')
+            for i in range(0,len(weapons_owned)):
+                print(f'{i+1}.{weapons_owned[i][0]}')
             time.sleep(text_timer)
             clear()
             level_increase()
@@ -1033,12 +1100,7 @@ def store():
             clear()
             level_increase()
             store()
-
-
-            #clear()
-            #level_increase()
-            #store()
-        
+#exit button 
     elif purchase == '':
         clear()
         level_increase()
@@ -1212,23 +1274,25 @@ def mine():
             pass
 
 def blacksmith():
+    global weapons_owned
     global first_weapon
     global current_weapon_damage
     global weapon_value
     global weapon
     global gold
-    global health_potion
+    global health_potion_count
 
     level_increase()
     print('Upon arriving at the store the Blacksmith welcomes you and shows you his wares, look like he has a number of useful items;')
-    purchase = input(f'Store items:                     Gold: {gold}g\n1.{weapon_damage()}\n2.{first_weapon} | {current_weapon_damage} | {weapon_value}g\n3.Sell items\nPress ENTER to leave store\nINPUT: ')
+    purchase = input(f'Store items:                     Gold: {gold}g\n1.{weapon_list_function()}\n2.{first_weapon} | {current_weapon_damage} | {weapon_value}g\n3.Sell items\nPress ENTER to leave store\nINPUT: ')
 
     if purchase == '1':
         if gold >= weapons_list[random_weapon][2]:
-            weapon = weapons_list[random_weapon][0]
-            current_weapon_damage = weapons_list[random_weapon][1]
-            weapon_value = weapons_list[random_weapon][2]
+            weapons_owned.append(weapons_list[random_weapon])
             gold = gold - weapons_list[random_weapon][2]
+            clear()
+            print(f'You have purchased {weapons_list[random_weapon][0]}')
+            time.sleep(text_timer)
             clear()
             level_increase()
             blacksmith()
@@ -1242,58 +1306,105 @@ def blacksmith():
             blacksmith()
 
     elif purchase == '3':
-        sell_items = input(f'What items do you wish to sell?: \n1.Health Potion 40g\n2.{weapon} 20g\nPress ENTER to go back\nINPUT: ')
+        clear()
+        weapon_list_function()
+        level_increase()
+#prints UI for selling items
+        print(f'What items do you wish to sell?: \n---------------------------------\n1.Health Potion 40g | Owned: {health_potion_count}')
+        for i in range(0,len(weapons_owned)):
+            print(f'{i+2}.{weapons_owned[i][0]} {weapons_owned[i][2]}g')
+        print(f'{len(weapons_owned)+2}.{weapon} {weapon_value}g')
+        sell_items = input('---------------------------------\nPress ENTER to go back\nINPUT: ')
 
-        if sell_items == '2':
-            if weapon != '':
-                weapon = ''
-                gold += weapon_value
-                clear()
-                level_increase()
-                blacksmith()
-            else:
-                clear()
-                print('You do not have a weapon to sell')
-                time.sleep(text_timer)
-                clear()
-                level_increase()
-                blacksmith()
-
-        elif sell_items == '1':
-            if health_potion >= 1:
-                health_potion -= 1
+        if sell_items == '1':
+            if health_potion_count >= 1:
+                health_potion_count -= 1
                 gold += 40
                 clear()
                 level_increase()
-                blacksmith()
+                store()
             else:
-                health_potion = 0
+                health_potion_count = 0
                 clear()
                 print('You have no Potions to sell')
-                time.sleep(text_timer)
+                time.sleep(2)
                 clear()
                 level_increase()
-                blacksmith()
-        
+                store()
+#-----CHEAT COMMAND-----#
         elif sell_items == '.dev':
+            clear()
             password = input('What is the password?: ')
             if password == 'wizzy':
+                clear()
                 add_gold = int(input('How much gold would you like to add?: '))
                 gold += add_gold 
                 clear()
                 level_increase()
-                blacksmith()
+                store()
             else:
+                clear()
                 print('Wrong password')
                 time.sleep(text_timer)
                 clear()
                 level_increase()
-                blacksmith()
+                store()
 
         elif sell_items == '':
             clear()
             level_increase()
-            blacksmith()
+            store()
+#Sell weapons from inventory
+        else:
+            try:
+                sell_items = int(sell_items)
+                if len(weapons_owned)+1 < sell_items:
+                    gold += weapon_value
+                    weapon = ''
+                    current_weapon_damage = 0
+                    weapon_value = 0
+                    weapon_elemental_check = 1
+                    clear()
+                    level_increase()
+                    print(f'Weapon: {weapon}')
+                    time.sleep(text_timer)
+                    clear()
+                elif len(weapons_owned)+1 <= sell_items:
+                    gold += weapons_owned[sell_items-2][2]
+                    weapons_owned.remove(weapons_owned[sell_items-2])
+                    print(weapons_owned)
+                else:
+                    print('You do not have a weapon to sell!')
+                    time.sleep(2)
+                    clear()
+                    level_increase()
+                    store()
+            except ValueError:
+                print('Not a number')
+#------CHEAT COMMAND------#                
+    elif purchase == '.dev':
+        clear()
+        password = input('What is the password?: ')
+        if password == 'wizzy':
+            clear()
+            weapon_list_function()
+            add_weapon = (input('What weapon would you like?: '))
+            for c in range(0,len(weapons_list)-1):
+                if weapons_list[c][0] == add_weapon:
+                    weapons_owned.append(weapons_list[c])
+            print(f'Weapon added to inventory')
+            for i in range(0,len(weapons_owned)):
+                print(f'{i+1}.{weapons_owned[i][0]}')
+            time.sleep(text_timer)
+            clear()
+            level_increase()
+            store()
+        else:
+            print('Wrong password')
+            time.sleep(text_timer)
+            clear()
+            level_increase()
+            store()
 
     elif purchase == '':
         clear()
@@ -1473,11 +1584,11 @@ print('Welcome to my game! To play just type your actions unless there is a numb
 __continue__ = input('-------------------------\nPress ENTER to continue: ')
 clear()
 
-tutorial()
-stats()
-trait_selection()
-print_stats()
-weapons_purchased()
+#tutorial()
+#stats()
+#trait_selection()
+#print_stats()
+
 while running == True:
     second_scene()
 
