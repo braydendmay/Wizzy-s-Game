@@ -1,0 +1,5 @@
+add view trait func
+
+add letter action to leave mine
+
+add fool proofing to packing

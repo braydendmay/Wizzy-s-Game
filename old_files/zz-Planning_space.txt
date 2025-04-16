@@ -1,0 +1,11 @@
+make a function to allow player to check stats, inventory, expeirence progress, settings, and perk system
+
+rarity levels (lowest to highest):
+
+-basic
+-common
+-uncommon
+-rare
+-ultra rare
+-legendary
+-mythical
