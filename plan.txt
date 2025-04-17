@@ -15,3 +15,5 @@ add function in settings to switch to single wielding and to give a damage buff 
 to make text bold in console print('\033[1mHello World![0m)
 
 add increase to critical hit chance for each level up or something like that
+
+can you use "range" in if statements for things like from # to # do this???

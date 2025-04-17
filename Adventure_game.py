@@ -9,6 +9,8 @@ clear = lambda: os.system('cls')
 
 gold = 200
 
+off_hand_list = []
+owned_off_hand = []
 weapons_owned = [['No Weapon', 10, 0, 1]]
 weapons_list = [] 
 
@@ -850,7 +852,7 @@ def weapon_list_function():
 
     random_weapon = random.randint(0,len(weapons_list))
 
-    random_weapon_choosen = weapons_list[random_weapon][0] + ' | ' + 'Damage: ' + str(weapons_list[random_weapon][1]) + ' | ' + str(weapons_list[random_weapon][2]) + 'g'
+    random_weapon_choosen = weapons_list[random_weapon][0] + ' | ' + 'Damage: ' + str(weapons_list[random_weapon][1]) + ' | ' + str(weapons_list[random_weapon][2]) + ''
 
     return random_weapon_choosen
 
@@ -863,9 +865,9 @@ def off_hand_weapon():
     # weapon -- damage multiplier -- value
     off_hand_list = [['Basic Katana', .05, 15],['Common Katana', .06, 25],['Uncommon Katana', .07, 40],['Rare Katana', .08, 55],['Ultra Rare Katana', .09, 70],['Legendary Katana', .10, 90],['Mythical Katana', .11, 150]]
 
-    random_off_hand = random.randint(0,len(off_hand_list))
+    random_off_hand = random.randint(0,len(off_hand_list)-1)
 
-    off_hand_chosen = off_hand_list[random_off_hand][0] + ' | ' + 'Damage: ' + str(off_hand_list[random_off_hand][1]) + ' | ' + str(off_hand_list[random_off_hand][2]) + 'g'
+    off_hand_chosen = 'Off Hand ' + off_hand_list[random_off_hand][0] + ' | ' + 'Damage: ' + str(off_hand_list[random_off_hand][1]) + ' | ' + str(off_hand_list[random_off_hand][2]) + 'g'
     
     return off_hand_chosen
 
@@ -1274,6 +1276,7 @@ def mine():
             pass
 
 def blacksmith():
+    global owned_off_hand
     global weapons_owned
     global first_weapon
     global current_weapon_damage
@@ -1284,7 +1287,7 @@ def blacksmith():
 
     level_increase()
     print('Upon arriving at the store the Blacksmith welcomes you and shows you his wares, look like he has a number of useful items;')
-    purchase = input(f'Store items:                     Gold: {gold}g\n1.{weapon_list_function()}\n2.{first_weapon} | {current_weapon_damage} | {weapon_value}g\n3.Sell items\nPress ENTER to leave store\nINPUT: ')
+    purchase = input(f'Store items:                     Gold: {gold}g\n1.{weapon_list_function()}\n2.{off_hand_weapon()}\n3.{first_weapon} | {current_weapon_damage} | {weapon_value}g\n4.Sell items\n------------------------------\nPress ENTER to leave store\nINPUT: ')
 
     if purchase == '1':
         if gold >= weapons_list[random_weapon][2]:
@@ -1296,8 +1299,18 @@ def blacksmith():
             clear()
             level_increase()
             blacksmith()
-
+    
     elif purchase == '2':
+        if gold >= off_hand_list[random_off_hand][2]:
+            owned_off_hand.append(off_hand_list[random_off_hand])
+            gold -= off_hand_list[random_off_hand][2]
+            print(f'You have purchased {off_hand_list[random_off_hand][0]}')
+            time.sleep(text_timer)
+            clear()
+            level_increase()
+            blacksmith()
+
+    elif purchase == '3':
         if gold >= 15 and weapon == '':
             weapon = first_weapon
             gold -= 15
@@ -1305,7 +1318,7 @@ def blacksmith():
             level_increase()
             blacksmith()
 
-    elif purchase == '3':
+    elif purchase == '4':
         clear()
         weapon_list_function()
         level_increase()
@@ -1315,7 +1328,6 @@ def blacksmith():
             print(f'{i+2}.{weapons_owned[i][0]} {weapons_owned[i][2]}g')
         print(f'{len(weapons_owned)+2}.{weapon} {weapon_value}g')
         sell_items = input('---------------------------------\nPress ENTER to go back\nINPUT: ')
-
         if sell_items == '1':
             if health_potion_count >= 1:
                 health_potion_count -= 1
@@ -1412,6 +1424,7 @@ def blacksmith():
         second_scene()
 
 def second_scene():
+    global weapons_list
     global health
     if health == 0:
         health = starting_health
@@ -1439,6 +1452,14 @@ def second_scene():
     elif browse == 'pack':
         clear()
         weapons_purchased()
+    
+    elif browse == '.dev':
+        clear()
+        weapon_list_function()
+        print('--LIST of WEAPONS--')
+        for i in range(0,len(weapons_list)):
+            print(f'{i+1}.{weapons_list[i][0]}')
+        x = input('Press ENTER to continue: ')
         
     else:
         clear()
@@ -1469,6 +1490,11 @@ def combat_level_one():
         monster_health = 30
         max_monster_health = monster_health
         monster_lvl = 1
+# Random drop for loot, implement this so it is given upon monster defeat    
+    drop_loot = random.randint(0,20)
+    if drop_loot == 0:
+        random_drop = random.randint(0,len(weapons_list)-1)
+        weapons_owned.append(weapons_list[random_drop])
 
 def fight_sequence_one():
     global monster_health
