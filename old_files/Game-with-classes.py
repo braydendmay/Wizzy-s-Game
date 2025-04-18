@@ -17,14 +17,12 @@ weapons_list = []
 weapon = 'Basic Wand'
 first_weapon = ''
 
-off_hand = 'Basic Katana'
-single_wield = True
+off_hand = ''
 
 weapon_value = 0
 first_weapon_value = 0
-off_hand_value = 0
 
-off_hand_multiplier = 0
+off_hand_value = 0
 
 current_weapon_damage = 0  
 weapon_elemental_check = 0
@@ -78,12 +76,42 @@ running = True
 text_timer = 2
 #----Settings----#
 
+class Inventory():
+    gold = gold
+    off_hand_list = off_hand_list
+    owned_off_hand = []
+    weapons_owned = [['No Weapon', 10, 0, 1]]
+    weapons_list = [] 
+
+    weapon = 'Basic Wand'
+    first_weapon = ''
+
+    off_hand = ''
+
+    weapon_value = 0
+    first_weapon_value = 0
+
+    off_hand_value = 0
+
+    current_weapon_damage = 0  
+    weapon_elemental_check = 0
+    critical_hit_chance = 0
+
+    health_potion_count = 0
+    mana_potion_count = 0
+
+
+def save_game():
+    global selected_class
+    with open('save_game.py', 'a') as file:
+        file.write(str(gold))
+
 def settings():
 
     global text_timer
     global running
 
-    settings_ui = input(f'Settings:\n1.Time Between text\n2.Use Perks\n3.View xp Progress\n4.Swap Weapons\n5.Toggle Two Hand Weilding: {single_wield}\n6.Tutorial\n7.Leave Game\nInput: ')
+    settings_ui = input('Settings:\n1.Time Between text\n2.Use Perks\n3.View xp Progress\n4.Swap Weapons\n5.Tutorial\n6.Leave Game\nInput: ')
 
     if settings_ui == '1':
         time_between_text = (input('How long would you like the time between text to be? (in seoonds): '))
@@ -108,25 +136,15 @@ def settings():
     
     elif settings_ui == '5':
         clear()
-        two_hand_toggle()
-
-    elif settings_ui == '6':
-        clear()
         tutorial()
 
-    elif settings_ui == '7':
+    elif settings_ui == '6':
         running = False
+        save_game()
 
     else:
         clear()
         settings()
-
-def two_hand_toggle():
-    global single_wield
-    if single_wield == True:
-        single_wield = False
-    elif single_wield == False:
-        single_wield = True
 
 def selection():
 
@@ -695,40 +713,25 @@ def tutorial():
 
 def damage_calculator():
     
-    global single_wield
-    global off_hand
     global current_weapon_damage
     global weapon_elemental_check
     global elemental
     global damage_output
 
     global monster_health
-    if off_hand != '':
-        if weapon_elemental_check == 0:
-            damage_output = current_weapon_damage + (current_weapon_damage * elemental) + (current_weapon_damage * off_hand)
-            #print(f'current damage {current_weapon_damage}')
-            crit_chance = random.randint(0, critical_hit_chance)
-            if crit_chance == 1:
-                damage_output += (damage_output * .30)
-                print('Crit!')
-        elif weapon_elemental_check == 1:
-            damage_output = current_weapon_damage + (current_weapon_damage * off_hand)
-            crit_chance = random.randint(0, critical_hit_chance)
-            if crit_chance == 1:
-                damage_output += (damage_output * .30)
-    elif off_hand == '' and single_wield == True:
-        if weapon_elemental_check == 0:
-            damage_output = current_weapon_damage + (current_weapon_damage * elemental) + (current_weapon_damage * 0.8)
-            #print(f'current damage {current_weapon_damage}')
-            crit_chance = random.randint(0, critical_hit_chance)
-            if crit_chance == 1:
-                damage_output += (damage_output * .30)
-                print('Crit!')
-        elif weapon_elemental_check == 1:
-            damage_output = current_weapon_damage + (current_weapon_damage * 0.8)
-            crit_chance = random.randint(0, critical_hit_chance)
-            if crit_chance == 1:
-                damage_output += (damage_output * .30)
+
+    if weapon_elemental_check == 0:
+        damage_output = current_weapon_damage + (current_weapon_damage * elemental) 
+        #print(f'current damage {current_weapon_damage}')
+        crit_chance = random.randint(0, critical_hit_chance)
+        if crit_chance == 1:
+            damage_output += (damage_output * .30)
+            print('Crit!')
+    elif weapon_elemental_check == 1:
+        damage_output = current_weapon_damage
+        crit_chance = random.randint(0, critical_hit_chance)
+        if crit_chance == 1:
+            damage_output += (damage_output * .30)
 
 def view_level():
     global exp_progress
@@ -879,7 +882,7 @@ def weapon_list_function():
 #weapon - damage - value - elemental check(0 = yes, 1 = no)       ------LIST OF ALL WEAPONS EXCEPT FOR UNIQUES------
     weapons_list = [['Basic Wand', 10, 15, 1],['Common Wand', 15, 25, 1],['Uncomon Wand', 20, 40, 1],['Rare Wand', 25, 55, 0],['Ultra Rare Wand', 30, 70, 0],['Legendary Wand', 40, 90, 0],['Mythical Wand', 50, 150, 0],['Basic Attunement', 10, 15, 1],['Common Attunement', 15, 25, 1],['Uncommon Attunement', 20, 40, 1],['Rare Attunement', 25, 55, 1],['Ultra Rare Attunement', 30, 70, 1],['Legendary Attunement', 40, 90, 1],['Mythical Attunement', 50, 150, 1],['Basic Sword', 10, 15, 1],['Common Sword', 0, 25, 1],['Uncommon Sword', 0, 40, 1],['Rare Sword', 0, 55, 1],['Ultra Rare Sword', 0, 70, 1],['Legendary Sword', 0, 90, 1],['Mythical Sword', 0, 150, 1],['Basic Katana', 10, 15, 1],['Common Katana', 15, 25, 1],['Uncommon Katana', 20, 40, 1],['Rare Katana', 25, 55, 1],['Ultra Rare Katana', 30, 70, 1],['Legendary Katana', 40, 90, 1],['Mythical Katana', 50, 150, 1],['Basic Kunai', 10, 15, 1],['Common Kunai', 15, 25, 1],['Uncommon Kunai', 20, 40, 1],['Rare Kunai', 25, 55, 1],['Ultra Rare Kunai', 30, 70, 1],['Legendary Kunai', 40, 90, 1],['Mythical Kunai', 50, 150, 1],['Basic Bow', 10, 15, 1],['Common Bow', 15, 25, 1],['Uncommon Bow', 20, 40, 1],['Rare Bow', 25, 55, 1],['Ultra Rare Bow', 30, 70, 1],['Legendary Bow', 40, 90, 1],['Mythical Bow', 50, 150, 1],['Basic Shield', 10, 15, 1],['Common Shield', 15, 25, 1],['Uncommon Shield', 20, 40, 1],['Rare Shield', 25, 55, 1],['Ultra Rare Shield', 30, 70, 1],['Legendary Shield', 40, 90, 1],['Mythical Shield', 50, 150, 1]]
 
-    random_weapon = random.randint(0,len(weapons_list)-1)
+    random_weapon = random.randint(0,len(weapons_list))
 
     random_weapon_choosen = weapons_list[random_weapon][0] + ' | ' + 'Damage: ' + str(weapons_list[random_weapon][1]) + ' | ' + str(weapons_list[random_weapon][2]) + ''
 
@@ -901,12 +904,6 @@ def off_hand_weapon():
     return off_hand_chosen
 
 def weapons_purchased():
-
-    global off_hand
-    global owned_off_hand
-    global off_hand_list
-    global off_hand_value
-    global off_hand_multiplier
 
     global weapons_list
     global weapon
@@ -949,101 +946,51 @@ def weapons_purchased():
             time.sleep(text_timer)
             clear()
     else:
-        off_or_main = input('Would you like to store an\n1.Main Hand Weapon\n2.Off Hand Item\nINPUT: ')
-        if off_or_main == '1':
-#storing weapon
-            store_weapon = input(f'Whould you like to store current weapon ({weapon})?: ').lower()
-            if store_weapon == 'yes':
-                weapon_list_function()
-                for i in range(0,len(weapons_list)-1):
-                    if weapons_list[i][0] == weapon:
-                        weapons_owned.append(weapons_list[i])
-                        weapon = ''
-#sawpping weapon
-            elif store_weapon == 'no':
-                weapon_list_function() 
-                swap_weapon = input('Would you like to swap weapons?: ')
-                if swap_weapon == 'yes':
-                    for i in range(0,len(weapons_owned)):
-                        print(f'{i+1}.{weapons_owned[i][0]}')
-                    swap_to_weapon = (input('What weapon would you like to swap to?: '))
-                    try:
-                        swap_to_weapon = int(swap_to_weapon)
-                        if swap_to_weapon > len(weapons_owned) or swap_to_weapon < 1:
-                            print('That is not an available option')
-                            time.sleep(text_timer)
-                            clear()
-                            weapons_purchased()
-                        else:   
-                            for i in range(0,len(weapons_list)-1):
-                                if weapons_list[i][0] == weapon:
-                                    weapons_owned.append(weapons_list[i])
-                                    weapon = ''       
-                            weapon = weapons_owned[swap_to_weapon-1][0]
-                            current_weapon_damage = weapons_owned[swap_to_weapon-1][1]
-                            weapon_value = weapons_owned[swap_to_weapon-1][2]
-                            weapon_elemental_check = weapons_owned[swap_to_weapon-1][3]
-                            for i in range(0,len(weapons_owned)-1):
-                                if weapons_owned[i][0] == weapon:
-                                    weapons_owned.remove(weapons_owned[i])
-                            print(f'You have changed your weapon to: {weapon}') 
-                            time.sleep(text_timer)
-                            clear()
-                    except ValueError:
-                        clear()
-                        print('Please enter the number listed next to your desired weapon')
+        store_weapon = input(f'Whould you like to store current weapon ({weapon})?: ').lower()
+        if store_weapon == 'yes':
+            weapon_list_function()
+            for i in range(0,len(weapons_list)-1):
+                if weapons_list[i][0] == weapon:
+                    weapons_owned.append(weapons_list[i])
+                    weapon = ''
+        elif store_weapon == 'no':
+            weapon_list_function() 
+            swap_weapon = input('Would you like to swap weapons?: ')
+            if swap_weapon == 'yes':
+                for i in range(0,len(weapons_owned)):
+                    print(f'{i+1}.{weapons_owned[i][0]}')
+                swap_to_weapon = (input('What weapon would you like to swap to?: '))
+                try:
+                    swap_to_weapon = int(swap_to_weapon)
+                    if swap_to_weapon > len(weapons_owned) or swap_to_weapon < 1:
+                        print('That is not an available option')
                         time.sleep(text_timer)
                         clear()
                         weapons_purchased()
-#storing off hand                       
-        elif off_or_main == '2':
-            if off_hand != '':
-                store_off_hand = input('Would you like to store off hand item?: ').lower()
-                if store_off_hand == 'yes':
-                    off_hand_weapon()
-                    for i in range(len(off_hand_list)-1):
-                        if off_hand_list[i][0] == off_hand:
-                            owned_off_hand.append(off_hand_list[i])
-                            off_hand = ''
-                            off_hand_value = 0
-                            off_hand_multiplier = 0
-#swapping off hand                            
-                elif store_off_hand == 'no':
-                    swap_off_hand = input('Would you like to swap to a different off hand item?: ').lower()
-                    if swap_off_hand == 'yes':
-                        off_hand_weapon()
-                        for i in range(len(owned_off_hand)):
-                            print(f'{i+1}.{owned_off_hand[i][0]}')
-                        swap_off_hand = input('Which item would you like to equip?: ')
-                        try: 
-                            swap_off_hand = int(swap_off_hand)
-                            if swap_off_hand > len(owned_off_hand) or swap_off_hand < 1:
-                                print('That is not an available option')
-                                time.sleep(text_timer)
-                                clear()
-                                weapons_purchased()
-                            else:
-                                for i in range(len(off_hand_list)-1):
-                                    if off_hand_list[i][0] == off_hand:
-                                        owned_off_hand.append(off_hand_list[i])
-                                    off_hand = owned_off_hand[swap_off_hand-1][0]
-                                    off_hand_value = owned_off_hand[swap_off_hand-1][1]
-                                    off_hand_multiplier = owned_off_hand[swap_off_hand-1][2]
-                                    for i in range(len(owned_off_hand)-1):
-                                        if owned_off_hand[i][0] == off_hand:
-                                            owned_off_hand.remove(owned_off_hand[i])
-                                print(f'You have changed your off hand to: {off_hand}')
-                                time.sleep(text_timer)
-                                clear()
-                        except ValueError:
-                            clear()
-                            print('Please enter the number listed next to your desired weapon')
-                            time.sleep(text_timer)
-                            clear()
-                            weapons_purchased()
-
-        else:
-            clear()  
+                    else:   
+                        for i in range(0,len(weapons_list)-1):
+                            if weapons_list[i][0] == weapon:
+                                weapons_owned.append(weapons_list[i])
+                                weapon = ''       
+                        weapon = weapons_owned[swap_to_weapon-1][0]
+                        current_weapon_damage = weapons_owned[swap_to_weapon-1][1]
+                        weapon_value = weapons_owned[swap_to_weapon-1][2]
+                        weapon_elemental_check = weapons_owned[swap_to_weapon-1][3]
+                        for i in range(0,len(weapons_owned)-1):
+                            if weapons_owned[i][0] == weapon:
+                                weapons_owned.remove(weapons_owned[i])
+                        print(f'You have changed your weapon to: {weapon}') 
+                        time.sleep(text_timer)
+                        clear()
+                except ValueError:
+                    clear()
+                    print('Please enter the number listed next to your desired weapon')
+                    time.sleep(text_timer)
+                    clear()
+                    weapons_purchased()
+                
+            else:
+                clear()  
 
 def store():
 
@@ -1361,7 +1308,6 @@ def mine():
             pass
 
 def blacksmith():
-
     global owned_off_hand
     global weapons_owned
     global first_weapon
@@ -1533,6 +1479,7 @@ def second_scene():
     
     elif browse == 'settings':
         clear()
+        save_game()
         settings()
     
     elif browse == 'pack':

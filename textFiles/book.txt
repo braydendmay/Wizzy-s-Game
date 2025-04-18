@@ -1,0 +1,11 @@
+Chapter: 2 Page #: 34 Note: i flippin did it!
+Chapter: 3 Page #: 32 Note: does the 2 in 32 effect the search?
+Chapter: 2 Page #: 3 Note: does it print both?
+Chapter: 4 Page #: 2 Note: does it get confused with page #?
+Chapter: 34 Page #: 500 Note: big number!
+Chapter: 20 Page #: 10 Note: does the 20 mix it up?
+Chapter: 3 Page #: 4 Note: testing the list all files thing
+Chapter: 38 Page #: 22 Note: just adding book back to the list
+Chapter: 2 Page #: 3 Note: peta dies with the first 30 seconds of the hunger games :)
+Chapter: 20 Page #: 19 Note: this is actually a really cool program, and it was realitivly easy to make as well
+Chapter: 1 Page #: 1 Note: lol literally am here just for the vibes
