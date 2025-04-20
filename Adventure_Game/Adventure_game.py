@@ -1,9 +1,13 @@
 import random
 import time
+import pygame
+#import game1 
+from mini_game import *
 import os
 
 clear = lambda: os.system('cls')
 
+random_weapon = 0
 
 #----inventory----#
 
@@ -882,7 +886,7 @@ def weapon_list_function():
     random_weapon = random.randint(0,len(weapons_list)-1)
 
     random_weapon_choosen = weapons_list[random_weapon][0] + ' | ' + 'Damage: ' + str(weapons_list[random_weapon][1]) + ' | ' + str(weapons_list[random_weapon][2]) + ''
-
+    random_weapon = weapons_list[random_weapon]
     return random_weapon_choosen
 
 def off_hand_weapon():
@@ -1238,6 +1242,8 @@ def mine():
                     else:
                         print('You found a health potion!')
                         health_potion_count += 1
+                elif rng_enenmy == 9:
+                    mini_game_func()
                 else:
                     print('There was nothing in this room')
 
@@ -1562,7 +1568,7 @@ def combat_level_one():
     global damage_per_hit
 
     monsters = ['Slime', 'Zombie', 'Mimic', 'Nymph', 'Dark Elf', 'Ent', 'Skeleton', 'Spider']
-    monster_number = random.randint(0,len(monsters)-1)
+    monster_number = random.randint(0,len(monsters))
     monster = monsters[monster_number]
     if monster == 'Mimic':
         damage_per_hit = 7
@@ -1579,6 +1585,7 @@ def combat_level_one():
 # Random drop for loot, implement this so it is given upon monster defeat    
     drop_loot = random.randint(0,20)
     if drop_loot == 0:
+        weapons_list()
         random_drop = random.randint(0,len(weapons_list)-1)
         weapons_owned.append(weapons_list[random_drop])
 
@@ -1691,6 +1698,44 @@ def display_monster_stats():
     print(f'----------------------------------------------------------------------------------\nPlayer Level: {player_level}  Gold: {gold}g        {monster} level: {monster_lvl} Health: {monster_health}/{max_monster_health}\nNext level: {player_exp}/{exp_progress}')
     print(f"Available Perk Points: {perk_count}           {username}'s Health: {health}/{starting_health}\n----------------------------------------------------------------------------------")
 
+
+    global weapons_list
+    global random_weapon_choosen
+    global random_weapon
+
+#copy and paste list#
+#    ['Basic', 10, 15, 1],['Common', 15, 25, 1],['Uncommon', 20, 40, 1],['Rare', 25, 55, 1],['Ultra Rare', 30, 70, 1],['Legendary', 40, 90, 1],['Mythical', 50, 150, 1],    #
+    def closing_tab():
+        #    Rarity  | Damage | Value | Elemental |  
+        #  ----------|--------|-------|-----------|
+        # Basic      |   10   |  15   |    n/a    |    
+        # Common     |   15   |  25   |    n/a    |         
+        # Uncommon   |   20   |  40   |    n/a    |
+        # Rare       |   25   |  55   |    n/a    |        
+        # Ultra Rare |   30   |  70   |    n/a    |        
+        # Legendary  |   40   |  90   |    n/a    |        
+        # Mythical   |   50   |  150  |    n/a    |        
+        # *Unique*   |   65   |   ?   |    n/a    |        
+        #============|========|=======|===========|
+        # Weapon types: main hand: Wand, Attunement, Sword, Katana, Kunai, Bow, Shield, Telekinesis, Golem
+        # Weapon Types: off Hand:  grimoire, None, shield, katana, shuriken, arrow, shield, none, support golem(might change this one)  
+        # Unique's:     
+        pass
+#weapon - damage - value - elemental check(0 = yes, 1 = no)       ------LIST OF ALL WEAPONS EXCEPT FOR UNIQUES------
+    weapons_list = [['Basic Wand', 10, 15, 1],['Common Wand', 15, 25, 1],['Uncomon Wand', 20, 40, 1],['Rare Wand', 25, 55, 0],['Ultra Rare Wand', 30, 70, 0],['Legendary Wand', 40, 90, 0],['Mythical Wand', 50, 150, 0],['Basic Attunement', 10, 15, 1],['Common Attunement', 15, 25, 1],['Uncommon Attunement', 20, 40, 1],['Rare Attunement', 25, 55, 1],['Ultra Rare Attunement', 30, 70, 1],['Legendary Attunement', 40, 90, 1],['Mythical Attunement', 50, 150, 1],['Basic Sword', 10, 15, 1],['Common Sword', 0, 25, 1],['Uncommon Sword', 0, 40, 1],['Rare Sword', 0, 55, 1],['Ultra Rare Sword', 0, 70, 1],['Legendary Sword', 0, 90, 1],['Mythical Sword', 0, 150, 1],['Basic Katana', 10, 15, 1],['Common Katana', 15, 25, 1],['Uncommon Katana', 20, 40, 1],['Rare Katana', 25, 55, 1],['Ultra Rare Katana', 30, 70, 1],['Legendary Katana', 40, 90, 1],['Mythical Katana', 50, 150, 1],['Basic Kunai', 10, 15, 1],['Common Kunai', 15, 25, 1],['Uncommon Kunai', 20, 40, 1],['Rare Kunai', 25, 55, 1],['Ultra Rare Kunai', 30, 70, 1],['Legendary Kunai', 40, 90, 1],['Mythical Kunai', 50, 150, 1],['Basic Bow', 10, 15, 1],['Common Bow', 15, 25, 1],['Uncommon Bow', 20, 40, 1],['Rare Bow', 25, 55, 1],['Ultra Rare Bow', 30, 70, 1],['Legendary Bow', 40, 90, 1],['Mythical Bow', 50, 150, 1],['Basic Shield', 10, 15, 1],['Common Shield', 15, 25, 1],['Uncommon Shield', 20, 40, 1],['Rare Shield', 25, 55, 1],['Ultra Rare Shield', 30, 70, 1],['Legendary Shield', 40, 90, 1],['Mythical Shield', 50, 150, 1]]
+
+    random_weapon = random.randint(0,len(weapons_list)-1)
+
+    random_weapon_choosen = weapons_list[random_weapon][0] + ' | ' + 'Damage: ' + str(weapons_list[random_weapon][1]) + ' | ' + str(weapons_list[random_weapon][2]) + ''
+    if gold >= weapons_list[random_weapon][2]:
+        weapons_owned.append(weapons_list[random_weapon])
+        gold = gold - weapons_list[random_weapon][2]
+        clear()
+        print(f'You have purchased {weapons_list[random_weapon][0]}')
+        time.sleep(text_timer)
+        clear()
+    return random_weapon_choosen
+mini_game_func()
 clear()
 print('Welcome to my game! To play just type your actions unless there is a number is listed. Then afterwards just press the ENTER key to submit your choice')
 __continue__ = input('-------------------------\nPress ENTER to continue: ')
